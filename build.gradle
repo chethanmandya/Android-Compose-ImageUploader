@@ -1,0 +1,29 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.chethan.buildsrc.Dependencies
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath Dependencies.androidGradlePlugin
+        classpath Dependencies.Kotlin.gradlePlugin
+        classpath Dependencies.HILT.gradle_plugin
+        classpath Dependencies.AndroidX.Navigation.safeArg
+        classpath Dependencies.Kotlin.allopen
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

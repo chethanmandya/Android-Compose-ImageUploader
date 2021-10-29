@@ -1,0 +1,136 @@
+import com.chethan.buildsrc.Dependencies
+import org.gradle.internal.os.OperatingSystem
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
+}
+
+
+android {
+    compileSdkVersion Dependencies.Apps.compileSdk
+
+    defaultConfig {
+        applicationId "com.chethan.myapplication"
+        minSdkVersion Dependencies.Apps.minSdk
+        targetSdkVersion Dependencies.Apps.targetSdk
+        versionCode Dependencies.Apps.versionCode
+        versionName Dependencies.Apps.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion Dependencies.Kotlin.version
+        kotlinCompilerExtensionVersion Dependencies.AndroidX.Compose.version
+    }
+}
+
+configurations {
+    ktlint
+}
+
+dependencies {
+
+    // Room DB
+    if (OperatingSystem.current().isMacOsX()) {
+        kapt "org.xerial:sqlite-jdbc:3.34.0"
+    }
+
+
+    implementation fileTree(dir: 'libs', include: '*.jar')
+
+    implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.Coroutines.android
+
+    implementation Dependencies.AndroidX.coreKtx
+    implementation Dependencies.AndroidX.appcompat
+    implementation Dependencies.AndroidX.palette
+    implementation Dependencies.AndroidX.material
+    implementation Dependencies.AndroidX.flexbox
+
+    implementation Dependencies.AndroidX.constraintlayout
+    implementation Dependencies.AndroidX.Navigation.navigationFragmentKTX
+    implementation Dependencies.AndroidX.Navigation.navigationUIKTX
+    implementation Dependencies.AndroidX.Navigation.navigationDynamicKTX
+
+
+    implementation Dependencies.AndroidX.Lifecycle.extensions
+    implementation Dependencies.AndroidX.Lifecycle.livedata
+    implementation Dependencies.AndroidX.Lifecycle.viewmodel
+    implementation Dependencies.AndroidX.Fragment.fragment_ktx
+
+    implementation Dependencies.AndroidX.Compose.foundation
+    implementation Dependencies.AndroidX.Compose.uiUtil
+    implementation Dependencies.AndroidX.Compose.material
+    implementation Dependencies.AndroidX.Compose.materialIconsExtended
+    implementation Dependencies.AndroidX.Compose.tooling
+    implementation Dependencies.AndroidX.Compose.runtimeLivedata
+    implementation Dependencies.AndroidX.Compose.runtime
+    implementation Dependencies.AndroidX.Compose.viewBinding
+    implementation Dependencies.AndroidX.Compose.pagingCompose
+    implementation Dependencies.AndroidX.Lifecycle.viewModelCompose
+
+    implementation Dependencies.AndroidX.Work.runtime
+    implementation Dependencies.AndroidX.Work.ktx
+
+    implementation Dependencies.Retrofit.retrofit
+    implementation Dependencies.Retrofit.gson
+    implementation Dependencies.Retrofit.SerializedAnnotation
+    implementation Dependencies.Retrofit.mock
+
+    implementation Dependencies.OkHttp.okhttp
+    implementation Dependencies.OkHttp.logging
+
+    // Hilt dependency Injection
+    implementation Dependencies.HILT.android
+    implementation Dependencies.HILT.viewModel
+    kapt Dependencies.HILT.compiler
+    kapt Dependencies.HILT.viewModelCompiler
+
+    //Lint warnings
+    ktlint Dependencies.LINT.ktlint
+
+    // Glide
+    implementation(Dependencies.Glide.runtime) {
+        exclude group: "com.android.support"
+    }
+    implementation Dependencies.Glide.okhttp3
+    kapt Dependencies.Glide.compiler
+
+    // Timber
+    implementation Dependencies.LOG.timber
+
+    // Room
+    implementation Dependencies.AndroidX.Room.runtime
+    implementation Dependencies.AndroidX.Room.ktx
+    kapt Dependencies.AndroidX.Room.compiler
+
+
+    debugImplementation "com.github.chuckerteam.chucker:library:3.4.0"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.4.0"
+
+
+}
