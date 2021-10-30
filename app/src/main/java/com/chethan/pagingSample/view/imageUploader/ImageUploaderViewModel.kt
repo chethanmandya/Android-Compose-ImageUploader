@@ -1,4 +1,4 @@
-package com.chethan.pagingSample.view.venueSearch
+package com.chethan.pagingSample.view.imageUploader
 
 import android.content.Context
 import android.net.Uri
@@ -35,6 +35,7 @@ class ImageUploaderViewModel @ViewModelInject constructor(
             val progressValueCallBacks = object : UploadCallbacks {
                 override fun onProgressUpdate(percentage: Int) {
 
+                    println(" percentage : $percentage")
                     viewModelScope.launch {
                         emit(
                             combineLatestData(

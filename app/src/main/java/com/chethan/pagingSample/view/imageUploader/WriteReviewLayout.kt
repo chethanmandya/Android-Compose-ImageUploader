@@ -1,4 +1,4 @@
-package com.chethan.pagingSample.view.venueSearch
+package com.chethan.pagingSample.view.imageUploader
 
 import android.Manifest
 import androidx.compose.foundation.*

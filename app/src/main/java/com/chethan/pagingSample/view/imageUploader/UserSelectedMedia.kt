@@ -1,4 +1,4 @@
-package com.chethan.pagingSample.view.venueSearch
+package com.chethan.pagingSample.view.imageUploader
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -57,7 +58,13 @@ import timber.log.Timber
 
 @Composable
 fun DefaultPlaceHolder(onClickOfUpload: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .wrapContentSize(align = Alignment.TopStart)
+            .wrapContentHeight()
+            .background(pastelGray)
+            .padding(20.dp)
+    ) {
 
         Text(
             modifier = Modifier.wrapContentSize(align = Alignment.TopStart),
@@ -138,9 +145,10 @@ fun SetUserSelectedMedia(
 
     VerticalGrid(
         Modifier
-            .fillMaxWidth()
+            .wrapContentSize(align = Alignment.TopStart)
             .wrapContentHeight()
-            .background(pastelGray),
+            .background(pastelGray)
+            .padding(20.dp),
         columns = 3
     ) {
 
@@ -236,7 +244,7 @@ fun SetSelectedMediaItemOnUI(
         }
     }
 
-    GlideApp.with(LocalContext.current).asBitmap()
+    GlideApp.with(LocalContext.current).asBitmap().override(400, 400)
         .load(item.mediaInfo.uri)
         .into(target)
 
@@ -367,13 +375,16 @@ fun UploadSelectedImageToRemote(
         }
     }
 
-    ShowProgressBar(imageUploadStatus.value?.uploadProgressValue ?: 0)
+    imageUploadStatus.value?.uploadProgressValue?.let { uploadProgressValue ->
+        ShowProgressBar(uploadProgressValue)
+    }
+
 }
 
 @Composable
 fun ShowProgressBar(value: Int = 0) {
     val isRequiredDismiss = value == 100
-    val alpha = if (isRequiredDismiss) 100f else 0f
+    val alpha = if (isRequiredDismiss) 0f else 1f
     val background = if (isRequiredDismiss) Color.Transparent else semiTransparent
 
     Box(
@@ -385,16 +396,17 @@ fun ShowProgressBar(value: Int = 0) {
 
         // progressbar
         val animatedProgress =
-            animateFloatAsState(targetValue = (value / 100.0).toFloat()).value
+            animateFloatAsState(
+                targetValue = (value / 100.0).toFloat()
+            ).value
 
-        if (value != 100)
-            LinearProgressIndicator(
-                backgroundColor = Color.White,
-                progress = animatedProgress,
-                color = darkSkyBlue,
-                modifier = Modifier
-                    .fillMaxWidth(0.7F)
-                    .align(Alignment.Center)
-            )
+        LinearProgressIndicator(
+            backgroundColor = Color.White,
+            progress = animatedProgress,
+            color = darkSkyBlue,
+            modifier = Modifier
+                .fillMaxWidth(0.7F)
+                .align(Alignment.Center)
+        )
     }
 }

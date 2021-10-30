@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/searchVenuesFragment"
-        android:name="com.chethan.pagingSample.view.venueSearch.ImageUploaderFragment"
+        android:name="com.chethan.pagingSample.view.imageUploader.ImageUploaderFragment"
         android:label="SearchVenuesFragment">
 
     </fragment>

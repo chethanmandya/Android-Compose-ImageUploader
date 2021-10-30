@@ -1,4 +1,4 @@
-package com.chethan.pagingSample.view.venueSearch
+package com.chethan.pagingSample.view.imageUploader
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel

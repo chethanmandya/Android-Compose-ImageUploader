@@ -12,6 +12,14 @@ plugins {
 
 
 android {
+    signingConfigs {
+        config {
+        storeFile file('../ImageUploader_release')
+            storePassword 'Test@123'
+            keyAlias 'ImageUploader'
+            keyPassword 'Test@123'
+        }
+    }
     compileSdkVersion Dependencies.Apps.compileSdk
 
     defaultConfig {
@@ -26,6 +34,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

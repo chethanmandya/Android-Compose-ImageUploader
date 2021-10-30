@@ -1,4 +1,4 @@
-package com.chethan.pagingSample.view.venueSearch
+package com.chethan.pagingSample.view.imageUploader
 
 import android.content.Intent
 import android.net.Uri
@@ -17,7 +17,6 @@ import com.chethan.pagingSample.utils.MediaPicker
 import com.chethan.pagingSample.utils.extension.findActivity
 import com.chethan.pagingSample.utils.isMediaHasValidSize
 import kotlinx.coroutines.Job
-import timber.log.Timber
 
 /**
  * Instantiate and manage it in composition like this
