@@ -1,4 +1,6 @@
 
 # Media uploader utility using Android Compose 
 
-<img src="https://github.com/chethu/Android-Compose-ImageUploader/blob/master/ImageUploader.gif" width="250" height="500" />
+
+https://user-images.githubusercontent.com/3158100/139612737-e35bc3a1-18d8-4697-844b-8956b85c8570.mp4
+
